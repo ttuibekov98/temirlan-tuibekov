@@ -410,12 +410,38 @@ section{ position:relative; padding-block: var(--space-6); }
   box-shadow:0 0 0 4px rgba(154,171,180,.12);
 }
 .hero-layout{
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:minmax(0, 1.12fr) minmax(440px, .88fr);
-  align-items:center;
-  gap:clamp(1rem, 4vw, 4rem);
+  position: relative;
+  display: block; /* было grid из двух колонок */
+}
+
+.hero-copy{
+  position: relative;
+  z-index: 5; /* текст поверх фото */
+  padding-bottom: 2rem;
+}
+
+.hero-portrait{
+  position: absolute;
+  top: -160px;           /* поднимаем фото выше */
+  right: -60px;
+  width: min(62%, 820px); /* было min(100%, 560px) — заметно крупнее */
+  height: 860px;          /* было 680px */
+  z-index: 1;             /* уходит за имя */
+  justify-self: unset;
+}
+
+.hero-portrait img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.1);
+  transform-origin: center bottom;
+}
+
+.hero-name{
+  position: relative;
+  z-index: 6; /* явно поверх фото */
 }
 .hero-copy{ position:relative; z-index:4; padding-bottom:2rem; }
 .hero h1{
@@ -906,10 +932,10 @@ footer{
 .hero-tagline {
   margin-top: 1.5rem;
   max-width: 520px;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-size: clamp(0.8rem, 1vw, 0.95rem); /* было 1–1.25rem, теперь на 2 ступени меньше */
   line-height: 1.5;
   font-weight: 450;
-  color: var(--soft-graphite);
+  color: rgba(247, 247, 245, 0.55); /* было var(--soft-graphite) — тёмный цвет на тёмном фоне hero почти не читался */
   letter-spacing: -0.015em;
 }
 
@@ -932,21 +958,13 @@ footer{
 
 /* Mobile */
 @media (max-width: 768px) {
-  .hero-name {
-    font-size: clamp(3rem, 14vw, 5rem);
-    max-width: none;
-  }
-
-  .hero-tagline {
-    font-size: 1rem;
-    max-width: 90%;
-  }
-
-  .hero-portrait {
-    min-height: 500px;
-  }
-
-  .hero-portrait img {
-    height: 560px;
+  .hero-layout{ display: flex; flex-direction: column; }
+  .hero-portrait{
+    position: relative;
+    top: 0; right: 0;
+    width: 100%;
+    height: 500px;
+    z-index: 1;
+    order: -1; /* фото сверху, текст под ним, как обычно на мобилке */
   }
 }
