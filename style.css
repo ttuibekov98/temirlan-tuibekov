@@ -2021,8 +2021,8 @@ footer {
 
 /* Левая часть — отдельная зона для текста */
 .hero-copy {
-  width: 52%;
-  max-width: 620px;
+  width: 62%;
+  max-width: 680px;
   padding-bottom: 3rem;
 }
 
@@ -2038,9 +2038,9 @@ footer {
 
 /* Фото — меньше и полностью справа */
 .hero-portrait {
-  right: -2%;
+  right: -5%;
   top: -40px;
-  width: min(45vw, 570px);
+  width: min(49vw, 670px);
   height: 800px;
 }
 
