@@ -422,7 +422,7 @@ section{ position:relative; padding-block: var(--space-6); }
 
 .hero-portrait{
   position: absolute;
-  top: -160px;           /* поднимаем фото выше */
+  top: -460px;           /* поднимаем фото выше */
   right: -60px;
   width: min(62%, 820px); /* было min(100%, 560px) — заметно крупнее */
   height: 860px;          /* было 680px */
