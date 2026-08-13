@@ -939,32 +939,37 @@ footer{
   letter-spacing: -0.015em;
 }
 
-/* Фото — немного крупнее и выше */
-.hero-portrait {
-  min-height: 620px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+.hero-layout{
+  position: relative;
+  display: block; /* было grid из двух колонок */
 }
 
-.hero-portrait img {
-  width: min(100%, 560px);
-  height: 680px;
+.hero-copy{
+  position: relative;
+  z-index: 5; /* текст поверх фото */
+  padding-bottom: 2rem;
+}
+
+.hero-portrait{
+  position: absolute;
+  top: -160px;           /* поднимаем фото выше */
+  right: -60px;
+  width: min(62%, 820px); /* было min(100%, 560px) — заметно крупнее */
+  height: 860px;          /* было 680px */
+  z-index: 1;             /* уходит за имя */
+  justify-self: unset;
+}
+
+.hero-portrait img{
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center bottom;
-  transform: scale(1.06);
+  transform: scale(1.1);
   transform-origin: center bottom;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .hero-layout{ display: flex; flex-direction: column; }
-  .hero-portrait{
-    position: relative;
-    top: 0; right: 0;
-    width: 100%;
-    height: 500px;
-    z-index: 1;
-    order: -1; /* фото сверху, текст под ним, как обычно на мобилке */
-  }
+.hero-name{
+  position: relative;
+  z-index: 6; /* явно поверх фото */
 }
