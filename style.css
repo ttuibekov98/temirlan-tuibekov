@@ -887,3 +887,66 @@ footer{
   .flow{ flex-direction:column; }
   .flow-arrow{ transform: rotate(90deg); }
 }
+/* ===== HERO NAME + TAGLINE ===== */
+
+.hero-title-block {
+  margin-bottom: 2rem;
+}
+
+.hero-name {
+  margin: 0;
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+  color: var(--graphite);
+  max-width: 10ch;
+}
+
+.hero-tagline {
+  margin-top: 1.5rem;
+  max-width: 520px;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.5;
+  font-weight: 450;
+  color: var(--soft-graphite);
+  letter-spacing: -0.015em;
+}
+
+/* Фото — немного крупнее и выше */
+.hero-portrait {
+  min-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-portrait img {
+  width: min(100%, 560px);
+  height: 680px;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.06);
+  transform-origin: center bottom;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-name {
+    font-size: clamp(3rem, 14vw, 5rem);
+    max-width: none;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  .hero-portrait {
+    min-height: 500px;
+  }
+
+  .hero-portrait img {
+    height: 560px;
+  }
+}
