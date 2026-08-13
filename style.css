@@ -950,3 +950,32 @@ footer{
     height: 560px;
   }
 }
+.hero-title-block {
+  margin-bottom: 2.5rem;
+}
+
+.hero-name {
+  margin: 0;
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+  color: var(--graphite);
+}
+
+.hero-tagline {
+  margin: 1.2rem 0 0;
+  max-width: 650px;
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  font-weight: 450;
+  color: var(--soft-graphite);
+}
+
+.hero-portrait img {
+  width: min(100%, 560px);
+  height: auto;
+  transform: scale(1.05);
+  transform-origin: center bottom;
+}
