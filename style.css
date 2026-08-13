@@ -2015,90 +2015,233 @@ footer {
     scroll-behavior: auto !important;
   }
 }
+
 /* =========================================================
-   HERO — FIX PHOTO / TEXT / CTA
+   HERO — FINAL LAYOUT FIX
    ========================================================= */
 
-/* Левая часть — отдельная зона для текста */
+/* Убираем белую полоску/стандартную ссылку Skip to content */
+.skip-link,
+.skip-to-content,
+a[href="#main-content"],
+a[href="#content"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  padding: .45rem .8rem;
+  border-radius: 0 0 8px 0;
+
+  background: var(--deep-graphite);
+  color: white;
+  font-size: .8rem;
+
+  transform: translateY(-120%);
+  transition: transform .2s ease;
+}
+
+.skip-link:focus,
+.skip-to-content:focus,
+a[href="#main-content"]:focus,
+a[href="#content"]:focus {
+  transform: translateY(0);
+}
+
+/* HERO text stays clearly on the left */
 .hero-copy {
-  width: 62%;
-  max-width: 680px;
-  padding-bottom: 3rem;
+  width: 54%;
+  max-width: 640px;
+  padding-bottom: 3.5rem;
+  position: relative;
+  z-index: 20;
 }
 
-/* Заголовок */
+/* Name — two clean lines */
 .hero h1 {
-  max-width: 7ch;
+  max-width: 8.2ch;
+  line-height: .86;
+  letter-spacing: -.055em;
 }
 
-/* Подзаголовок — ограничиваем ширину, чтобы было 2 строки */
+/* Space between the name and the short phrase */
 .hero-lead {
-  max-width: 38ch;
+  max-width: 35ch;
+  margin-top: 1.65rem;
+  line-height: 1.45;
 }
 
-/* Фото — меньше и полностью справа */
-.hero-portrait {
-  right: -5%;
-  top: -40px;
-  width: min(49vw, 670px);
-  height: 800px;
-}
-
-/* Само изображение */
-.hero-portrait img {
-  width: 100%;
-  height: 850px;
-  transform: translateX(-50%) scale(1);
-}
-
-/* Кнопка "Смотреть проекты" */
+/* Keep CTA clearly visible */
 .hero .btn-ghost {
-  color: rgba(255,255,255,.9);
-  border-color: rgba(255,255,255,.45);
-  background: transparent;
+  color: rgba(255,255,255,.92);
+  border-color: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.015);
 }
 
 .hero .btn-ghost:hover {
-  color: white;
-  border-color: white;
-  background: rgba(255,255,255,.06);
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255,255,255,.08);
 }
 
+/* =========================================================
+   PHOTO — BIGGER, RIGHT, SOFT FADE + BLUR AT BOTTOM
+   ========================================================= */
+
+.hero-portrait {
+  position: absolute;
+  z-index: 6;
+
+  right: -4%;
+  top: -115px;
+
+  width: min(61vw, 790px);
+  height: 900px;
+
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hero-portrait img {
+  position: absolute;
+  z-index: 5;
+
+  left: 50%;
+  top: -20px;
+
+  width: 100%;
+  height: 980px;
+  max-width: none;
+
+  object-fit: contain;
+  object-position: center top;
+
+  transform: translateX(-50%) scale(1.08);
+  transform-origin: center top;
+
+  /* smooth disappearance at the bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    rgba(0,0,0,.94) 80%,
+    rgba(0,0,0,.62) 88%,
+    rgba(0,0,0,.20) 95%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    rgba(0,0,0,.94) 80%,
+    rgba(0,0,0,.62) 88%,
+    rgba(0,0,0,.20) 95%,
+    transparent 100%
+  );
+}
+
+/* Blur only the lower disappearing edge of the photo */
+.hero-portrait::before {
+  content: "";
+  position: absolute;
+  z-index: 7;
+
+  inset: 0;
+  pointer-events: none;
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 72%,
+    rgba(0,0,0,.08) 80%,
+    rgba(0,0,0,.45) 88%,
+    #000 96%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 72%,
+    rgba(0,0,0,.08) 80%,
+    rgba(0,0,0,.45) 88%,
+    #000 96%,
+    #000 100%
+  );
+}
+
+/* Soft blue-gray glow behind the portrait */
+.hero-portrait::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+
+  width: 82%;
+  height: 82%;
+  left: 18%;
+  top: 8%;
+
+  background: radial-gradient(
+    circle,
+    rgba(109,141,168,.16),
+    transparent 68%
+  );
+
+  filter: blur(24px);
+  pointer-events: none;
+}
 
 /* =========================================================
    TABLET
    ========================================================= */
 
-@media (max-width: 1024px) {
-
+@media (max-width: 1200px) {
   .hero-copy {
-    width: 58%;
-    max-width: 580px;
+    width: 56%;
+    max-width: 610px;
   }
 
   .hero-portrait {
     right: -10%;
-    width: min(48vw, 520px);
-    height: 720px;
-    top: -20px;
+    width: min(64vw, 700px);
   }
-
-  .hero-portrait img {
-    height: 760px;
-  }
-
 }
 
+@media (max-width: 1024px) {
+  .hero-copy {
+    width: 58%;
+    max-width: 570px;
+  }
+
+  .hero-portrait {
+    right: -14%;
+    top: -80px;
+    width: min(68vw, 650px);
+  }
+}
 
 /* =========================================================
    MOBILE
    ========================================================= */
 
 @media (max-width: 900px) {
-
   .hero-copy {
     width: 100%;
     max-width: 650px;
+    padding-bottom: 0;
+  }
+
+  .hero h1 {
+    max-width: 9ch;
+    font-size: clamp(3.3rem, 10vw, 5.8rem);
+  }
+
+  .hero-lead {
+    max-width: 38ch;
+    margin-top: 1.5rem;
   }
 
   .hero-portrait {
@@ -2106,36 +2249,56 @@ footer {
     right: auto;
     top: auto;
 
-    width: min(85%, 500px);
-    height: 560px;
+    width: min(100%, 650px);
+    height: 650px;
 
     align-self: center;
     margin-top: 1rem;
+    order: 2;
   }
 
   .hero-portrait img {
-    height: 650px;
+    height: 760px;
+    top: -20px;
   }
-
 }
 
+@media (max-width: 720px) {
+  .hero h1 {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 560px) {
+  .hero-lead {
+    max-width: 34ch;
+  }
 
   .hero-portrait {
-    width: 90%;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    width: min(112vw, 620px);
+    height: 600px;
+    margin-top: 1rem;
+    margin-left: -6vw;
   }
 
   .hero-portrait img {
-    width: 100%;
-    height: 580px;
+    width: 110%;
+    height: 700px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-lead {
+    max-width: 31ch;
   }
 
+  .hero-portrait {
+    width: 115vw;
+    max-width: 560px;
+    height: 520px;
+    margin-left: -8vw;
+  }
+
+  .hero-portrait img {
+    width: 108%;
+    height: 620px;
+  }
 }
