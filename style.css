@@ -431,13 +431,12 @@ section{ position:relative; padding-block: var(--space-6); }
 .hero-portrait{
   position:relative;
   width:min(100%, 650px);
-  height:min(72vh, 690px);
+  height:680px;
   justify-self:end;
   overflow:visible;
-  border-radius:0;
   background:transparent;
-  box-shadow:none;
   border:0;
+  box-shadow:none;
 }
 .hero-portrait img{
   position:absolute;
@@ -450,30 +449,26 @@ section{ position:relative; padding-block: var(--space-6); }
   transform:translateX(-50%);
   object-fit:contain;
   object-position:center bottom;
-  filter:none;
-  -webkit-mask-image:linear-gradient(to bottom, black 0%, black 86%, transparent 100%);
-  mask-image:linear-gradient(to bottom, black 0%, black 86%, transparent 100%);
+
+  /* мягкое растворение только снизу */
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    black 0%,
+    black 78%,
+    rgba(0,0,0,.8) 88%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    black 0%,
+    black 78%,
+    rgba(0,0,0,.8) 88%,
+    transparent 100%
+  );
 }
-.hero-portrait::before{
-  content:"";
-  position:absolute;
-  z-index:1;
-  inset:5% -10% 0 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);
-  background-size:44px 44px;
-  opacity:.32;
-  mask-image:linear-gradient(to bottom,transparent,black 18%,black 72%,transparent 100%);
-}
+.hero-portrait::before,
 .hero-portrait::after{
-  content:"";
-  position:absolute;
-  z-index:3;
-  left:-8%; right:-8%; bottom:0;
-  height:42%;
-  background:linear-gradient(to top, var(--deep-graphite) 5%, rgba(23,23,23,.72) 28%, transparent 82%);
-  pointer-events:none;
+  display:none;
 }
 .portrait-grid{ display:none; }
 .hero h1 .line{ display:block; overflow:hidden; }
